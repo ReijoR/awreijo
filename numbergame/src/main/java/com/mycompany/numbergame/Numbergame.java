@@ -28,7 +28,7 @@ public class Numbergame {
             if (guess > secret)
                 System.out.println("Number is lower");
             if (guess < secret)
-                    System.out.println("Number is higher");
+                System.out.println("Number is higher");
             
             
             
