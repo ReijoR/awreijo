@@ -12,6 +12,7 @@ package net.reijo.techniques;
 import net.reijo.techniques.dates.DateTests;
 import java.lang.reflect.Method;
 import net.reijo.techniques.collections.CollectionsTests;
+import net.reijo.techniques.files.FileTests;
 
 import net.reijo.techniques.interfaces.Company;
 import net.reijo.techniques.interfaces.Customer;
@@ -29,7 +30,7 @@ import net.reijo.techniques.interfaces.Worker;
  */
 public class Techniques {
     
-    static void shop(Customer c){
+    /*static void shop(Customer c){
         c.makePurchase(2000);
     }
     
@@ -38,8 +39,11 @@ public class Techniques {
         w.pay(amount);
         System.out.println("....done with it");
     }
+    */
     
-    public static void main(String[] args) {
+    public static void main(String[] args)throws Exception
+    
+    { 
         /*finances(a -> System.out.println("Pimeää työtä "+a),8000);
         
         finances((double a) -> {
@@ -72,7 +76,11 @@ public class Techniques {
         //DateTests.howManyDays();
         //DateTests.localeTest();
         //DateTests.differentOffices();
-        CollectionsTests.personArrayTests();
+        //CollectionsTests.personArrayTests();
+        FileTests.createFiles();
+        FileTests.readFiles();
+        
+        
         
         
     }
