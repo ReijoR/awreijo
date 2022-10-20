@@ -5,9 +5,14 @@
 
 package net.tutorit.cpharjoitus1;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -52,7 +57,7 @@ public class CPHarjoitus1 {
     /*
     Laajenna koodia siten, että saat alla olevat kaksi metodia toimimaan
     */
-    /*
+    
     static void veterinarianTreats(Pet p){
         System.out.println("Sairaskertomus: "+p.getBasicInfo()); // Sekarotuinen (Hurtta) tai Norjalainen metsäkissa (Misu)
     }
@@ -60,30 +65,43 @@ public class CPHarjoitus1 {
     static void veterinarianTester(){
         Dog d=new Dog("Hurtta");
         Cat c=new Cat("Misu");
+        veterinarianTreats(d);
+        veterinarianTreats(c);
     }
-    */
+    
     static String justDate(LocalDateTime dt){
-        return "";
+        return dt.toLocalDate().toString();
+        
     }
     
     static boolean isDateAfter(LocalDateTime dt,int year,int month, int day){
-        return false;
+        LocalDate dt2 = LocalDate.of(year,month,day);
+        LocalDate dt3 = dt.toLocalDate();
+        
+        return dt2.isAfter(dt3);
     }
     
     static LocalDateTime nextWednesdayAtNine(){
-        return null;
+        LocalDateTime dt = LocalDateTime.now().withHour(9).withMinute(0).withSecond(0);
+        while (true){
+            dt = dt.plusDays(1);
+            if (dt.getDayOfWeek()==DayOfWeek.WEDNESDAY)
+                break;
+        }
+        return dt;
     }
     
     static LocalDate askForDate(){
         // Lue käyttäjän syöte (suomalaisittain) "20.10.2022" ja palauta se LocalDate:na
         Scanner scanner = new Scanner(System.in);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
         String s = scanner.nextLine();
+        DateTimeFormatter pattern = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(new Locale("fi"));
+        LocalDate dt = LocalDate.parse(s, pattern);
+        
 
   //convert String to LocalDate
-        LocalDate dt = LocalDate.parse(s, formatter);
-        System.out.println(dt);
-        return null;
+        
+        return dt;
     }
     
     public static void main(String[] args) {
@@ -94,7 +112,7 @@ public class CPHarjoitus1 {
         System.out.println("On 1.6.2023 jälkeen: "+isDateAfter(nextWednesdayAtNine(),2023,6,1));
         System.out.println("Pelkkä päivämäärä: "+justDate(nextWednesdayAtNine()));
         // Myös seuraavat pitäisi saada pois kommenteista....
-        //veterinarianTester();
+        veterinarianTester();
         //companyTester();
     }
 }
