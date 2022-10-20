@@ -7,6 +7,8 @@ package net.tutorit.cpharjoitus1;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 /**
  *
@@ -74,6 +76,13 @@ public class CPHarjoitus1 {
     
     static LocalDate askForDate(){
         // Lue käyttäjän syöte (suomalaisittain) "20.10.2022" ja palauta se LocalDate:na
+        Scanner scanner = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+        String s = scanner.nextLine();
+
+  //convert String to LocalDate
+        LocalDate dt = LocalDate.parse(s, formatter);
+        System.out.println(dt);
         return null;
     }
     

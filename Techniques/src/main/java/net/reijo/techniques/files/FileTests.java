@@ -51,7 +51,26 @@ public class FileTests {
                
     }       
     public static void simpleLineEditor()throws Exception{
-        BufferedReader bf2 = new BufferedReader(new InputStreamreader(System.in));
+        
+        BufferedReader bf2 = new BufferedReader(new InputStreamReader(System.in));
+        try {
+	
+	       System.out.println("Mitä tehdään?");
+               String s = bf2.readLine();
+               System.out.println("Anna tiedoston nimi");
+               String nimi = bf2.readLine();
+               try (PrintWriter writer = new PrintWriter(nimi, "UTF-8")) {
+                    writer.println("");
+            
+             File file2 = new File ("C:\\javatraining\\awreijo\\Techniques\\Testi.txt"); 
+                BufferedReader br2 = new BufferedReader(new FileReader(file2));
+                String string;
+                while((string = br2.readLine()) != null)
+                    System.out.println(string);     
+        }
+        }
+            catch(IOException ex) {
+    }
     }
             
 }
