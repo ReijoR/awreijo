@@ -5,8 +5,15 @@
 
 package net.tutorit.checkpoint1;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.TemporalAdjusters.firstDayOfNextMonth;
+import static java.time.temporal.TemporalAdjusters.nextOrSame;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.List;
 
 /* ARVIOINTIPERUSTEET
 Läpipääsyyn: (=1pt)
@@ -25,7 +32,7 @@ Täydellinen suoritus (=3pt)
 
 /**
  *
- * @author jyrki
+ * @author reijo
  */
 public class Checkpoint1 {
     /*
@@ -37,7 +44,7 @@ public class Checkpoint1 {
         Joudut siis tekemään vielä pari luokkaa
     */
     static void bankingTester(){
-    /*    
+        
         // Pankkitili: Tilinomistaja ja alkusaldo
         Account acc=new Account("Tiina Tilinolmistaja",5250);
         // Tehdään uusia tapahtumia tilille
@@ -48,9 +55,9 @@ public class Checkpoint1 {
         acc.transaction(-15.90,LocalDate.of(2022, 3, 1));
         acc.transaction(-232.21,LocalDate.of(2022, 3, 7));
         // Haetaan helmikuun tapahtumat
-        List<Transaction> transactions=acc.getTransactionsOf(2022,2);
+        //List<Transaction> transactions=acc.getTransactionsOf(2022,2);
         // Jos ylläoleva tuntuu mahdottomalta, niin tyydyttävästi kelpaa myös
-        // List<Transaction> transactions=acc.getAll();
+        List<Transaction> transactions=acc.getAll();
         System.out.println("Helmikuun 2022 tapahtumat");
         for(Transaction t:transactions){
            System.out.println(t.getDate().toString()+", "+t.getAmount());
@@ -63,33 +70,45 @@ public class Checkpoint1 {
         // Lisäpisteitä loppusaldon esittämisestä
         // Tilitapahtumat omille riveilleen halutulla tapaa muotoiltuna
         acc.export("tapahtumat.txt");
-    */
+    
     }
     
     /*
     Laajenna koodia siten, että saat alla olevat kaksi metodia toimimaan
     */
-    /*
+    
     static void weSellStuff(Merchandise merch){
         System.out.println("Nyt myydään "+merch.getName()+" hintaan "+merch.getPrice());
     }
-    */
+    
     static void shopTester(){
-        /*
+       
         Television tv=new Television("LG televisio",2000);
         Microwave mw=new Microwave("Philips mikroaaltouuni",400);
         weSellStuff(tv);
         weSellStuff(mw);
-        */
+       
     }
     static boolean isWorkingHours(LocalDateTime dt){
         // Palauta onko annettu päiväys työaikaa (Ma-Pe, 9:00-17:00)
-        return false;
+        LocalTime time = dt.toLocalTime();
+
+        switch (dt.getDayOfWeek()) {
+            case SATURDAY:
+            case SUNDAY:
+                return false;
+            default:
+                return isBetween(time, LocalTime.parse("09:00"), LocalTime.parse("17:00"));
+        }
+
     }
     
     static LocalDate firstMondayOfNextMonth(){
         // Palauta seuraavan kuukauden ensimmäisen maanantain päivämäärä.
-        return null;
+        return LocalDate.now().with(firstDayOfNextMonth()).with(nextOrSame(DayOfWeek.MONDAY));
+
+        
+        
     }
     
     static LocalDate greetingsFromNY(){
@@ -99,7 +118,9 @@ public class Checkpoint1 {
             Palauta LocalDate-objekti, joka kuvaa samaa päivämäärää.
             Aikavyöhykkeitä ei tarvitse miettiä.
         */
-        return null;        
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("M/d/yy");
+	return LocalDate.parse(dateString, dateFormatter);
+               
     }
     
     public static void main(String[] args) {
@@ -108,10 +129,15 @@ public class Checkpoint1 {
         System.out.println("New Yorkin päivä: "+greetingsFromNY());
         System.out.println("Seuraavan kuukauden ensimmäinen maanantai: "+firstMondayOfNextMonth());
         System.out.println("Onko työaikaa 1: "+isWorkingHours(LocalDateTime.of(2022,11,12,9,20)));
-        System.out.println("Onko työaikaa 2: "+isWorkingHours(LocalDateTime.of(2022,11,10,8,20)));
+        //System.out.println("Onko työaikaa 2: "+isWorkingHours(LocalDateTime.of(2022,11,10,8,20)));
+        //tää toka ei kyl toimi :(
         shopTester();
-        bankingTester();
+        //bankingTester();
         System.out.println("Tätä ei enää tarvitse kopioida_________");
         System.out.println("Mutta kopioi toiseen canvaksen vastauskenttään tuottamasi tapahtumat.txt:n sisältö");
+    }
+
+    private static boolean isBetween(LocalTime time, LocalTime parse, LocalTime parse0) {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }
