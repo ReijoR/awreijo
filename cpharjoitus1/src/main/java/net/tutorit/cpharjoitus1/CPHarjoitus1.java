@@ -5,13 +5,13 @@
 
 package net.tutorit.cpharjoitus1;
 
+import java.io.FileNotFoundException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -28,8 +28,8 @@ public class CPHarjoitus1 {
         Seuraavakin funktio pitäisi saada toimimaan.
         Joudut siis tekemään vielä pari luokkaa
     */
-    /*    
-    static void companyTester(){
+        
+    static void companyTester() throws FileNotFoundException{
         Company c=new Company("Testers United");
         c.addEmployee("Tuomas",LocalDate.of(2000,5,1));
         System.out.println(c.getEmployeeInfo("Tuomas"));
@@ -37,7 +37,7 @@ public class CPHarjoitus1 {
         c.addEmployee("Simeoni",LocalDate.of(2010, 9, 2),LocalDate.of(2015,2,3));
         System.out.println(c.getEmployeeInfo("Simeoni"));
         // Pitäisi tulostua: Simeoni aloitti 2.9.2010 ja lopetti 3.2.2015
-        c.addEmployee("Aapo",LocalDate.of(2014,5));
+        c.addEmployee("Aapo",LocalDate.of(2014,5,23));
         // addEmployee:lle siis parametrinä nimi sekä työsuhteen alkupäivä sekä mahdollisesti lopetuspäivä
         List<Person> all=c.getAll();
         // Tulosta kaikki työntekijät (myös ne joiden työsuhde ei enää jatku) nimen mukaisessa aakkosjärjestyksessä
@@ -52,7 +52,7 @@ public class CPHarjoitus1 {
         // Kaikki työntekijät tiedostoon
         c.exportEmployees("employees.txt");
     }
-    */
+    
         
     /*
     Laajenna koodia siten, että saat alla olevat kaksi metodia toimimaan
@@ -104,7 +104,7 @@ public class CPHarjoitus1 {
         return dt;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         LocalDate dt=askForDate();
         System.out.println("Käyttäjä antoi päivämäärän: "+dt);
         System.out.println("Seuraava keskiviikko kello 9.00: "+nextWednesdayAtNine());
@@ -113,6 +113,6 @@ public class CPHarjoitus1 {
         System.out.println("Pelkkä päivämäärä: "+justDate(nextWednesdayAtNine()));
         // Myös seuraavat pitäisi saada pois kommenteista....
         veterinarianTester();
-        //companyTester();
+        companyTester();
     }
 }

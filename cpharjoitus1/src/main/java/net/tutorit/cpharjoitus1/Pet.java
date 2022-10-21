@@ -9,5 +9,7 @@ package net.tutorit.cpharjoitus1;
  * @author Reijo
  */
 interface Pet {
+
+    public String getBasicInfo();
     
 }

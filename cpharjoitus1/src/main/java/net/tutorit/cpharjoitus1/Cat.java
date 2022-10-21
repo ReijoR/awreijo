@@ -8,10 +8,15 @@ package net.tutorit.cpharjoitus1;
  *
  * @author Reijo
  */
-class Cat {
+public class Cat implements Pet {
+    private String name;
 
-    Cat(String misu) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cat(String name) {
+        this.name = name;
     }
-    
+
+    @Override
+    public String getBasicInfo() {
+        return "Norjalainen metsäkissa "+name;
+    }
 }

@@ -8,10 +8,17 @@ package net.tutorit.cpharjoitus1;
  *
  * @author Reijo
  */
-class Dog {
+public class Dog implements Pet {
+    private String name;
+    
+    public Dog(String name) {
+        
+            this.name = name;
+    }
 
-    Dog(String hurtta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public String getBasicInfo() {
+        return "Sekarotuinen koira "+name;
     }
     
 }
