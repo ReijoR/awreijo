@@ -14,11 +14,12 @@ public class Transaction {
     private final ArrayList<Account> transanctions = new ArrayList<>();
 
     Object getDate() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        
     }
 
     String getAmount() {
-        throw new UnsupportedOperationException("Not supported yet.");
+         
     }
     
 }

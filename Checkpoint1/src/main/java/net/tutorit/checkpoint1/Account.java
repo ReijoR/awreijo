@@ -16,22 +16,27 @@ public class Account {
     private double amount;
 
     Account(String name, double amount) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        this.name = name;
+        this.amount = amount;
     }
 
     void transaction(double d, LocalDate of) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        
     }
 
     
     
 
-    void export(String tapahtumattxt) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    void export(String "tapahtumat.txt") {
+         
     }
 
     List<Transaction> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        transanctions.sort((a,b) -> {
+            return a.getDate().compareTo(b.getDate());
+        });
+        
+        return transanctions;
     }
     
 }
