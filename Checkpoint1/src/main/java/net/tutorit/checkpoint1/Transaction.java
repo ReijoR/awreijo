@@ -4,22 +4,42 @@
  */
 package net.tutorit.checkpoint1;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+
 
 /**
  *
  * @author Reijo
  */
 public class Transaction {
-    private final ArrayList<Account> transanctions = new ArrayList<>();
-
-    Object getDate() {
-        
-        
-    }
-
-    String getAmount() {
-         
-    }
+    LocalDate date;
+    double amount;
     
+    public Transaction(LocalDate dt, double am){
+            
+        date = dt;
+        amount = am;
+        
+    }       
+    
+
+    LocalDate getDate() {
+        return date;
+        
+    }
+
+    public double getAmount() {
+        
+        return amount;
+    }
+    /*String getDescription() {
+        String tx="Pano";
+        if (amount<0) tx="Otto";
+        return tx+" "+date+" "+amount;
+    }
+    */
+    /*void add(Transaction transaction) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    */
 }

@@ -45,9 +45,11 @@ public class Checkpoint1 {
     */
     static void bankingTester(){
         
-        // Pankkitili: Tilinomistaja ja alkusaldo
+    // Pankkitili: Tilinomistaja ja alkusaldo
         Account acc=new Account("Tiina Tilinolmistaja",5250);
         // Tehdään uusia tapahtumia tilille
+        acc.transaction(new Transaction(LocalDate.of(2022, 2, 1),-12.3));
+        
         acc.transaction(-214.23,LocalDate.of(2022, 2, 18));
         acc.transaction(-14.11,LocalDate.of(2022, 2, 20));
         acc.transaction(-11.20,LocalDate.of(2022, 2, 25));
@@ -55,7 +57,7 @@ public class Checkpoint1 {
         acc.transaction(-15.90,LocalDate.of(2022, 3, 1));
         acc.transaction(-232.21,LocalDate.of(2022, 3, 7));
         // Haetaan helmikuun tapahtumat
-        //List<Transaction> transactions=acc.getTransactionsOf(2022,2);
+        //<Transaction> transactions=acc.getTransactionsOf(2022,2);
         // Jos ylläoleva tuntuu mahdottomalta, niin tyydyttävästi kelpaa myös
         List<Transaction> transactions=acc.getAll();
         System.out.println("Helmikuun 2022 tapahtumat");
@@ -63,7 +65,7 @@ public class Checkpoint1 {
            System.out.println(t.getDate().toString()+", "+t.getAmount());
            // Yllä oleva riittää. Lisäpistemahdollisuus jos tuloste tulee fiksusti toteutettuna
            // Muodossa "Otto 20.2.2022, -14.11"
-           // Kutsumalla System.out.println(t.getDescription());
+           //System.out.println(t.getDescription());
         }
         // Viedään tilitapahtumat tiedostoon
         // Tiedoston alkuun tilinomistaja sekä alkusaldo
@@ -72,7 +74,6 @@ public class Checkpoint1 {
         acc.export("tapahtumat.txt");
     
     }
-    
     /*
     Laajenna koodia siten, että saat alla olevat kaksi metodia toimimaan
     */
@@ -124,17 +125,17 @@ public class Checkpoint1 {
     }
     
     public static void main(String[] args) {
-        System.out.println("Tervetuloa testaamaan osaamistasi!");
+        //System.out.println("Tervetuloa testaamaan osaamistasi!");
         System.out.println("Kopioi lopuksi tulosteet tästä eteenpäin canvakseen vastaukseksi_________");
         System.out.println("New Yorkin päivä: "+greetingsFromNY());
         System.out.println("Seuraavan kuukauden ensimmäinen maanantai: "+firstMondayOfNextMonth());
         System.out.println("Onko työaikaa 1: "+isWorkingHours(LocalDateTime.of(2022,11,12,9,20)));
         //System.out.println("Onko työaikaa 2: "+isWorkingHours(LocalDateTime.of(2022,11,10,8,20)));
-        //tää toka ei kyl toimi :(
+        
         shopTester();
-        //bankingTester();
-        System.out.println("Tätä ei enää tarvitse kopioida_________");
-        System.out.println("Mutta kopioi toiseen canvaksen vastauskenttään tuottamasi tapahtumat.txt:n sisältö");
+        bankingTester();
+        //System.out.println("Tätä ei enää tarvitse kopioida_________");
+        //System.out.println("Mutta kopioi toiseen canvaksen vastauskenttään tuottamasi tapahtumat.txt:n sisältö");
     }
 
     private static boolean isBetween(LocalTime time, LocalTime parse, LocalTime parse0) {

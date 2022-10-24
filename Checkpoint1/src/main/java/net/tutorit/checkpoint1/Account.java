@@ -4,30 +4,37 @@
  */
 package net.tutorit.checkpoint1;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Reijo
  */
-public class Account {
-    private String name;
-    private double amount;
+class Account {
+    String owner;
+    double initialAmount;
+    ArrayList<Transaction> transactions = new ArrayList();
 
-    Account(String name, double amount) {
-        this.name = name;
-        this.amount = amount;
+    public Account(String owner, double initialAmount) {
+        this.owner = owner;
+        this.initialAmount = initialAmount;
     }
 
-    void transaction(double d, LocalDate of) {
+    void transaction(double amount, LocalDate date) {
+        
+        transactions.add(new Transaction(date,amount));
         
     }
+    void transaction(Transaction transaction){
+        transactions.add(transaction);
+    }
 
-    
-    
-
-    void export(String "tapahtumat.txt") {
+    /*void export(String "tapahtumat.txt") {
          
     }
 
@@ -38,5 +45,30 @@ public class Account {
         
         return transanctions;
     }
-    
+    */
+
+    List<Transaction> getAll() {
+        ArrayList<Transaction> ret = new ArrayList<>();
+        for(Transaction t:transactions){
+            ret.add(t);
+        }
+        return ret;
+    }
+    void export(String fn) {
+        try(PrintWriter pw=new PrintWriter(new FileWriter(fn))){
+            pw.println(owner);
+            pw.println(initialAmount);
+            double finalBalance=initialAmount;
+            for(Transaction t:transactions){
+                finalBalance+=t.getAmount();
+                pw.println(t.getDate()+" "+t.getAmount());
+                //pw.println(t.getDescription());
+            }
+            pw.println("Loppusaldo "+finalBalance);
+        }
+        catch(IOException ex){
+            System.out.println("Export epäonnistui");
+        }
+   }
 }
+
