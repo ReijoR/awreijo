@@ -14,11 +14,13 @@ public class Meat implements Product{
     private String name;
     private LocalDate bestBefore;
     
+    
     public Meat (String Liha, LocalDate bestBefore){
-        this.name = Liha;
+        this.name = "Liha";
         this.bestBefore = LocalDate.now().plusDays(3);
     }
-
+    
+    
    
     @Override
     public String getName() {

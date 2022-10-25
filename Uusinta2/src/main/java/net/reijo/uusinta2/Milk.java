@@ -14,10 +14,12 @@ public class Milk implements Product {
     private String name;
     private LocalDate bestBefore;
     
-    public Milk (String Maito, LocalDate bestBefore){
-            this.name = Maito;
+    
+    public Milk (){
+            this.name = "Maito";
             this.bestBefore=LocalDate.now().plusDays(7);
-    }                
+     
+    }
 
     @Override
     public String getName() {

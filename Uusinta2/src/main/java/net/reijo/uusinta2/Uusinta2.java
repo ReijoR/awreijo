@@ -16,14 +16,14 @@ public class Uusinta2 {
 
     public static void main(String[] args) {
         
-    
+        /*
         Store s=new Store();
         s.add(new Milk());
         s.add(new Meat());
         s.add(new Milk());
         s.add(new Meat());
         s.print();
-
+        */
         ArrayList<Product> pl=s.getBestBefore(LocalDate.of(2022,10,30));
 
         for(Product p:pl) System.out.println(p.getName()+" "+p.getBestBefore());

@@ -14,28 +14,37 @@ import java.util.ArrayList;
 public class Store {
     private ArrayList<Product> product = new ArrayList<>();
     
-   
-    public Store(ArrayList product){
-        this.product=product;
+    
+    public Store(){
+        
         
     }
-   
     
-    public void addProduct(String name, LocalDate bestBefore) {
-        
-        
+    public void addProduct(Product  p) {
+        product.add(p);
+
     }
 
-    public void print(String item, LocalDate bestBefore) {
+    /**
+     *
+     */
+    public void print() {
+        
+        for (Product p : product) {
+        
+        }
         
         
         
-        //Milk gets old 2.11.2022
-        //Meat gets old 28.10.2022
+        //Maito vanhenee....
+        
     }
 
     ArrayList<Product> getBestBefore(LocalDate what) {
-        
+        return null;
     }
+
+    
+    
     
 }
