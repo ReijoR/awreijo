@@ -12,20 +12,41 @@ package net.reijo.miniprojekti;
 public class Miniprojekti {
 
     public static void main(String[] args) {
-        ScreenReporter rep=new ScreenReporter();
-            //rep.addColumn("Name",20);
-            //rep.addColumn("Age",5);
+        /*ScreenReporter rep=new ScreenReporter();
+        
+            rep.addColumn("Name",20);
+            rep.addColumn("Age",5);
             rep.printColumns();
             rep.printData("John Wayne");
             rep.printData(82);
             rep.printData("Ronald Reagan");
             rep.printData(93);
-        /*PersonReport pr=new PersonReport();
+        */
+        
+        PersonReport pr=new PersonReport();
             pr.addData(new Person("John Wayne",82));
             pr.addData(new Person("Ronald Reagan",92));
             pr.doReport();
-            
-            
+        
+        //FileReporter fr = new FileReporter();
+            /*
+            fr.addColumn("Name",20);
+            fr.addColumn("Age",5);
+            fr.printColumns();
+            fr.printData("John Wayne");
+            fr.printData(82);
+            fr.printData("Ronald Reagan");
+            fr.printData(93);
+               */
+            //fr.("fileReporter1.txt");
+        /*
+        CompanyReport cr=new CompanyReport();
+            cr.addData(new Company("Coders Unlimited","555-234234","info@coders.net"));
+            cr.addData(new Company("Testers united","555-123123","info@testers.com"));
+            cr.doReport();
         */
+        
+            
+        
     }
 }

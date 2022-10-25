@@ -13,12 +13,14 @@ public class ColumnDef {
     private int width;
     
 
-    ColumnDef(String Columntitle, int width) {
-        this.ColumnTitle= ColumnTitle;
+    public ColumnDef(String Columntitle, int width) {
+        this.ColumnTitle= Columntitle;
         this.width=width;
         
     }
-
+    public int getWidth(){
+        return width;
+    }
     /**
      * @return the ColumnTitle
      */
@@ -26,26 +28,4 @@ public class ColumnDef {
         return ColumnTitle;
     }
 
-    /**
-     * @param ColumnTitle the ColumnTitle to set
-     */
-    public void setColumnTitle(String ColumnTitle) {
-        this.ColumnTitle = ColumnTitle;
-    }
-
-    /**
-     * @return the width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * @param width the width to set
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
-    
 }
