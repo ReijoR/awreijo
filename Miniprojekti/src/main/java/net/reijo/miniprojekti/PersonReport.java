@@ -10,6 +10,21 @@ import java.util.ArrayList;
  *
  * @author Reijo
  */
+public class PersonReport extends ReportBase<Person> {
+        
+    public PersonReport(Reporter rep){
+    super(rep);
+    }
+    protected void addColumns(Reporter reporter){
+    reporter.addColumn("Name",20);
+    reporter.addColumn("Age",5);
+    }
+    protected void printData(Reporter reporter, Person p){
+    reporter.printData(p.getName());
+    reporter.printData(p.getAge());
+    }
+}
+/*
 public class PersonReport {
     
     private FileReporter personReporter = new FileReporter("henkilot.txt");
@@ -17,12 +32,14 @@ public class PersonReport {
     
     
     
-    public PersonReport(){
+    public PersonReport(Reporter rep){
         personReporter.addColumn("Name", 20);
         personReporter.addColumn("Age" , 5);
-        //this.age = age;
+        
   
     }
+
+    
 
     public void addData(Person p) {
         persons.add(p);
@@ -31,7 +48,7 @@ public class PersonReport {
     
     public void doReport() {
         personReporter.beginReport();
-        personReporter.printColumns();
+        //personReporter.printColumns();
         for(Person p:persons){
             personReporter.printData(p.getName());
             personReporter.printData(p.getAge());
@@ -42,3 +59,4 @@ public class PersonReport {
     }
 
 }
+*/

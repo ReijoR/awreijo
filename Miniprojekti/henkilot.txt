@@ -1,3 +1,0 @@
-Name                Age  
-John Wayne          82   
-Ronald Reagan       92   
