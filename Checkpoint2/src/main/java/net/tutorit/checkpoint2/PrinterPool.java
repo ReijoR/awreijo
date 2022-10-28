@@ -5,21 +5,20 @@
 package net.tutorit.checkpoint2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
  * @author jyrki
  */
-public class PrinterPool {
-    private ArrayList<Printer> printers=new ArrayList<>();
+public class PrinterPool extends Pool {
+    //private ArrayList<Printer> printers=new ArrayList<>();
     
-    public void add(Printer p){
-        printers.add(p);
-    }
     
     public void showPool(){
         System.out.println("Printers");
-        for(Printer p: printers){
+        for (Iterator it = super.printers.iterator(); it.hasNext();) {
+            Object p = it.next();
             System.out.println(p);
         }
     }

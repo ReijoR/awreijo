@@ -10,17 +10,17 @@ import java.util.ArrayList;
  *
  * @author jyrki
  */
-public class NewspaperList {
-    private ArrayList<Newspaper> listing=new ArrayList<>();
+public class NewspaperList extends Pool {
+    //private ArrayList<Newspaper> listing=new ArrayList<>();
     
-    public void add(Newspaper p){
-        listing.add(p);
-    }
     
     public void listThem(){
         System.out.println("Newspapers");
-        for(Newspaper p:listing){
-            System.out.println(p.getDescription());
+        for(Object p:super.listing){
+            System.out.println();
         }
     }
+
+    
+    
 }
