@@ -126,14 +126,14 @@ public class Checkpoint1 {
     
     public static void main(String[] args) {
         //System.out.println("Tervetuloa testaamaan osaamistasi!");
-        System.out.println("Kopioi lopuksi tulosteet tästä eteenpäin canvakseen vastaukseksi_________");
-        System.out.println("New Yorkin päivä: "+greetingsFromNY());
-        System.out.println("Seuraavan kuukauden ensimmäinen maanantai: "+firstMondayOfNextMonth());
+        //System.out.println("Kopioi lopuksi tulosteet tästä eteenpäin canvakseen vastaukseksi_________");
+        //System.out.println("New Yorkin päivä: "+greetingsFromNY());
+        //System.out.println("Seuraavan kuukauden ensimmäinen maanantai: "+firstMondayOfNextMonth());
         System.out.println("Onko työaikaa 1: "+isWorkingHours(LocalDateTime.of(2022,11,12,9,20)));
-        //System.out.println("Onko työaikaa 2: "+isWorkingHours(LocalDateTime.of(2022,11,10,8,20)));
+        System.out.println("Onko työaikaa 2: "+isWorkingHours(LocalDateTime.of(2022,11,10,8,20)));
         
-        shopTester();
-        bankingTester();
+        //shopTester();
+        //bankingTester();
         //System.out.println("Tätä ei enää tarvitse kopioida_________");
         //System.out.println("Mutta kopioi toiseen canvaksen vastauskenttään tuottamasi tapahtumat.txt:n sisältö");
     }

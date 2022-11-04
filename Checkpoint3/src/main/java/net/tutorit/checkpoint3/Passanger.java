@@ -1,0 +1,86 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package net.tutorit.checkpoint3;
+
+/**
+ *
+ * @author jyrki
+ */
+public class Passanger {
+    private Integer id;
+    private Integer carId;
+    private String name;
+    private String passangerType;
+
+    
+    public Passanger(){
+    }
+    
+    public Passanger(String n, Integer c, String t){
+        carId=c;
+        name=n;
+        passangerType=t;
+    }
+    
+    /**
+     * @return the Id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param Id the Id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the carId
+     */
+    public Integer getCarId() {
+        return carId;
+    }
+
+    /**
+     * @param carId the carId to set
+     */
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the passangerType
+     */
+    public String getPassangerType() {
+        return passangerType;
+    }
+
+    /**
+     * @param passangerType the passangerType to set
+     */
+    public void setPassangerType(String passangerType) {
+        this.passangerType = passangerType;
+    }
+    
+    public String toString(){
+        return id+","+name+","+carId+","+passangerType;
+    }
+}
