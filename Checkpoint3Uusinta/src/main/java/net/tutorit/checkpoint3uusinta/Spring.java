@@ -48,8 +48,8 @@ public class Spring {
         
         
         //5
-        //System.out.println(repo.findIinesWithSameCar());
-            System.out.println(repo.findPassangersWithSameCarAsIines());
+        
+        System.out.println(repo.findPassangersWithSameCarAsIines());
         
         
         System.out.println("Spring testit loppuu");

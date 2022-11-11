@@ -15,13 +15,13 @@ import org.springframework.data.repository.CrudRepository;
 public interface PassangerRepository extends CrudRepository<Passanger,Integer>{
     
     
-    
+    /*
     @Query("SELECT * FROM passanger WHERE passanger.name='Iines' GROUP BY passanger.car_id")
     List<Passanger> findPassangersWithSameCarAsIines();
-    
-    
-    /*
-    @Query("SELECT * FROM Passanger WHERE car_id (SELECT car_id FROM Passanger WHERE name = 'Iines')")
-    List<Passanger> findPassangersWithSameCarAsIines();
     */
+    
+    
+    @Query("SELECT * FROM Passanger WHERE car_id IN (SELECT car_id FROM Passanger WHERE name = 'Iines')")
+    List<Passanger> findPassangersWithSameCarAsIines();
+    
 }
