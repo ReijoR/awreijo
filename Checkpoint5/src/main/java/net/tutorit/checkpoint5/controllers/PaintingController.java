@@ -38,12 +38,12 @@ public class PaintingController {
     List<Painting> getAll(@RequestParam(defaultValue="") String filter) {
         return repo.findAll();
         
-    }    
+    }   
+    
     
     @GetMapping("/{id}")
     Painting get(@PathVariable int id){
         Painting p=repo.findById(id).orElse(null);
-        if (p==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foo Not Found");
         return p;
     }
     

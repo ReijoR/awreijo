@@ -36,12 +36,23 @@
             };
 
             function fillPaintings(){
-                HTTP.get("/paintings/").then(paintings => { document.getElementById("paintings").value=paintings; });
-                // Hae maalaukset kontrollerilta ja täytä ne sivulla olevaan select-kenttään
+               
+                
+                
+                HTTP.get("/paintings/").then(paintings => {
+                    let html = '';
+                    paintings.forEach(painting => {
+                        html +=`<option value="${painting.id}">${painting.name}</option>`;
+                    });
+                    document.getElementById("paintings").innerHTML=html;
+                
+                });
+            
             }
 
             function getPainting(id){
                 // Varmista, että urli vastaa kontrollerisi urlia 
+                
                 HTTP.get("/paintings/"+id).then(painting => {
                     document.getElementById("paintingId").value=painting.id;
                     document.getElementById("name").value=painting.name; 
@@ -56,6 +67,18 @@
     
             function saveClicked(){
                 console.log("Save");
+                
+                let id = document.getElementById("paintingId").value;
+                let name = document.getElementById("name").value;
+                let artist = document.getElementById("artist").value;
+                let painting={id,name,artist};
+                
+                
+                HTTP.put("/paintings/"+id,painting).then(painting => {
+                    fillPaintings();
+                    getPainting(id);
+                }); 
+                
                 // Lue maalauksen tiedot syöttökentistä
                 // Muodosta niistä objekti ja lähetä se palvelimelle
                 // Kun saat vastauksen, niin täytä lista uudelleen kutusmalla fillPaintings-funktiota
