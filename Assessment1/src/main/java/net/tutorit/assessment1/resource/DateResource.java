@@ -50,17 +50,13 @@ public class DateResource {
     @Produces("text/plain")
     @Consumes("text/plain")
     @Path("meeting")
-    public ZonedDateTime dates2(@QueryParam(value="loc") String loc, @QueryParam(value="hours") int hours, String date) {
-    //public String dates4(@QueryParam(value="loc", required=true) String loc, @QueryParam(value="hours", required=true) int hours, String date) {    
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        //String date = "2022-05-02 15:21:45";
-        //LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
-        
-       
+    public ZonedDateTime dates2(@QueryParam(value="locale") String locale, @QueryParam(value="hours") int hours, String date) {
+    
+    
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
     LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
     localDateTime.plusHours(hours);
-    ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(loc));
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneId.of(locale));
 
     ZonedDateTime zonedDateTimeInFinland = zonedDateTime.withZoneSameInstant(ZoneOffset.ofHours(2));
     return zonedDateTimeInFinland;
@@ -70,6 +66,11 @@ public class DateResource {
         //t.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
         
         //return t.format(Date.from(localDateTime.toInstant(ZoneOffset.of("+02:00"))));
+        
+        //public String dates4(@QueryParam(value="loc", required=true) String loc, @QueryParam(value="hours", required=true) int hours, String date) {    
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        //String date = "2022-05-02 15:21:45";
+        //LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
         
     }
     

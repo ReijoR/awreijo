@@ -16,6 +16,9 @@ import javax.sql.DataSource;
 
 @WebServlet(name = "reportingServlet", value = "/reporting")
 public class ReportingServlet extends HttpServlet {
+    private String message;
+    @Resource(lookup="jdbc/books")
+    private DataSource myds;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -25,17 +28,17 @@ public class ReportingServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>Tuoteraportti</h1>");
         try{
-            /*
+            
             Connection con=myds.getConnection();
                 Statement stm=con.createStatement();
-                ResultSet rs=stm.executeQuery("select p.* FROM passanger p left join car c on (regcity = p.name)");
+                ResultSet rs=stm.executeQuery("select * from product LEFT JOIN manufacturer on product.manufacturer_id = manufacturer.id UNION SELECT * FROM product RIGHT JOIN manufacturer ON product.manufacturer_id=manufacturer.id"); 
                 out.println("<table>");
-                out.println("<thead><tr><th>Valmistaja</th><th>Tuote</th><th>Hinta</th></tr></thead>");
+                out.println("<thead><tr><th>Manufacturer</th><th>Product</th><th>Price</th></tr></thead>");
                 
                 out.println("<tbody>");
                 
                 while(rs.next()){
-                        out.println("<tr><td>"+rs.getString("car_id")+"</td><td>"+rs.getString("name")+"</td><td>"+rs.getString("psgtype")+"</td></tr>");
+                        out.println("<tr><td>"+rs.getString("manufacturer_id")+"</td><td>"+rs.getString("product_name")+"</td><td>"+rs.getDouble("price")+"</td></tr>");
                 }
                 out.println("</tbody>");
                 out.println("</table>");
@@ -43,7 +46,7 @@ public class ReportingServlet extends HttpServlet {
                 con.close();
                 
             // Tähän tietokantahaku ja taulukon tulostaminen toimeksiannon mukaisesti
-            */
+            
         }
         catch(Exception ex){
             System.out.println("******************Virhe");
