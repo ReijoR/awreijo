@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kirjat</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="paintings.css" rel="stylesheet" />
+        <script>
+            
+            function makeTheCall(url,method,data){
+                return new Promise(function(resolve,reject){
+                    let x=new XMLHttpRequest();
+                    x.onreadystatechange=function(){
+                        if (x.readyState==4) {
+                            try{
+                                let obj=JSON.parse(x.responseText);
+                                resolve(obj);
+                            }
+                            catch(ex){
+                                reject(x);
+                            }
+                        };
+                    }
+                    x.open(method,url,true);
+                    x.setRequestHeader("Content-Type","application/json");
+                    x.setRequestHeader("Accept","application/json");
+                    x.send(data && JSON.stringify(data));
+                });
+            }
+            
+            let HTTP={
+                get: url => makeTheCall(url,"get"),
+                put: (url,data) => makeTheCall(url,"put",data),
+                post: (url,data) => makeTheCall(url,"post",data),
+                delete: (url) => makeTheCall(url,"delete")
+            };
+
+            function fillPaintings(){
+                // Hae maalaukset kontrollerilta ja täytä ne sivulla olevaan select-kenttään
+                let url='/paintings';
+                let filter=document.getElementById("search").value;
+                if (filter) url+='?filter='+filter;
+                HTTP.get(url).then(paintings => {
+                   let htmlTable='';
+                   paintings.forEach(painting => {
+                      htmlTable+=`<tr>
+                                <td onclick="selectedChange(${painting.id})">${painting.id}</td>
+                                <td onclick="selectedChange(${painting.id})">${painting.name}</td>
+                                <td onclick="selectedChange(${painting.id})">${painting.artist}</td>
+                                <td onclick="deleteClicked(${painting.id})">Poista</td></tr>`;
+                   });
+                   document.getElementById("booksTable").innerHTML=htmlTable;
+                });
+            }
+
+            function getPainting(id){
+                // Varmista, että urli vastaa kontrollerisi urlia 
+                if (!id){
+                    document.getElementById("paintingId").value="";
+                    document.getElementById("name").value="";
+                    document.getElementById("artist").value="";
+                    document.getElementById("saveButton").classList.add("noShow");
+                    document.getElementById("createButton").classList.remove("noShow");
+                }
+                else HTTP.get("/paintings/"+id).then(painting => {
+                    document.getElementById("paintingId").value=painting.id;
+                    document.getElementById("name").value=painting.name; 
+                    document.getElementById("artist").value=painting.artist;
+                    document.getElementById("saveButton").classList.remove("noShow");
+                    document.getElementById("createButton").classList.add("noShow");
+                });
+            }
+    
+            function selectedChange(id){
+                getPainting(id);
+            }
+    
+            function saveClicked(){
+                console.log("Save");
+                // Lue maalauksen tiedot syöttökentistä
+                // Muodosta niistä objekti ja lähetä se palvelimelle
+                // Kun saat vastauksen, niin täytä lista uudelleen kutusmalla fillPaintings-funktiota
+                let id=document.getElementById("paintingId").value;
+                let name=document.getElementById("name").value;
+                let artist=document.getElementById("artist").value;
+                let painting={id,name,artist};
+                HTTP.put("/paintings/"+id,painting).then(painting => {
+                   fillPaintings(); 
+                   getPainting(id);
+                });
+            }
+            
+            /// END OF 1 point
+            
+            function createClicked(){
+                console.log("Create");
+                // Luo uusi maalaus syöttökentistä löytyvillä tiedoilla
+                // Saatuasi vastauksen täytä lista uudelleen
+                let name=document.getElementById("name").value;
+                let artist=document.getElementById("artist").value;
+                let painting={name,artist};
+                HTTP.post("/paintings",painting).then(painting => {
+                   fillPaintings(); 
+                   getPainting(painting.id);
+                });
+            }
+            
+            function deleteClicked(id){
+                console.log("Delete");
+                HTTP.delete("/paintings/"+id).then(resp => {
+                   console.log("Delete resp",resp);
+                   fillPaintings();
+                   clearClicked()
+                });
+                // Poista kirja
+                // Saatuasi vastauksen täytä lista uudelleen
+            }
+            
+            function searchChanged(){
+                let search=document.getElementById("search").value;
+                console.log("Search:",search);
+                fillPaintings();
+                // Muokkaa kontrolleria siten, että voit antaa sille "search"-parametrin
+                // Vastauksena saat listan maalauksista, joiden nimessä esiintyy annettu termi
+                // Täytä lista uudelleen saamillasi maalauksilla
+            }
+            
+            function clearClicked(){
+                getPainting(0);
+            }
+    
+            window.onload=function(){
+                fillPaintings();
+                document.getElementById("saveButton").addEventListener("click",saveClicked);
+                document.getElementById("createButton").addEventListener("click",createClicked);
+                document.getElementById("clearButton").addEventListener("click",clearClicked);
+                document.getElementById("search").addEventListener("keyup",searchChanged);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <img src="vincent.jpg" />
+                <h1>Maalauksia</h1>
+            </header>
+            <nav>
+                <a href="index.html">Taulut</a>
+                <a href="taulukko.html">Taulukko</a>
+            </nav>
+            <main class="justTable">
+                <section class="form">
+                    <input type="hidden" id="paintingId" />
+                    <div class="input">
+                        <label for="name">Name</label>
+                        <input id="name" />
+                    </div>
+                    <div class="input">
+                        <label for="artist">Artist</label>
+                        <input id="artist" />
+                    </div>
+                    <div class="buttons">
+                        <input id="saveButton" type="button" value="Save" class="noShow" />
+                        <input id="createButton" type="button" value="Create" />
+                        <input id="clearButton" type="button" value="Tyhjennä" />
+                    </div>
+                </section>
+                <section class="extra">
+                    <input id="search" placeholder="Etsi" />
+                    <table>
+                        <thead>
+                            <tr><th>Id</th><th>Name</th><th>Artist</th><th>&nbsp;</th></tr>
+                        </thead>
+                        <tbody id="booksTable">
+
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+            <footer>Copyright (c) Coders Unlimited</footer>
+        </div>
+    </body>
+</html>
